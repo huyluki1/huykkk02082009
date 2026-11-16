@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang cá nhân - Nguyễn Gia Huy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* Nền gradient phối từ #787FF6 sang xanh lam pastel sáng */
+            background: linear-gradient(135deg, #787FF6 0%, #8fa2f9 45%, #b8d0ff 100%);
+            color: #252847;
+            min-height: 100vh;
+            padding: 25px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* KHU VỰC STICKER NỔI BẬT XUNG QUANH BACKGROUND */
+        .bg-sticker {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.65;
+            animation: floatSticker 6s ease-in-out infinite;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes floatSticker {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        /* Định vị các sticker rải đều xung quanh */
+        .st-1 { top: 3%; left: 4%; animation-delay: 0s; font-size: 2.2rem; }
+        .st-2 { top: 8%; right: 5%; animation-delay: 1.2s; font-size: 2.5rem; }
+        .st-3 { top: 40%; left: 1%; animation-delay: 2.4s; font-size: 2rem; }
+        .st-4 { top: 50%; right: 2%; animation-delay: 0.8s; font-size: 2.3rem; }
+        .st-5 { bottom: 5%; left: 6%; animation-delay: 1.8s; font-size: 2.4rem; }
+        .st-6 { bottom: 8%; right: 7%; animation-delay: 2.1s; font-size: 2.2rem; }
+
+        /* Bố cục tổng thể phủ toàn bộ màn hình laptop */
+        .main-wrapper {
+            width: 100%;
+            max-width: 1700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Khung thẻ kính mờ trắng ánh lam */
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 24px;
+            box-shadow: 0 18px 40px rgba(74, 82, 184, 0.18);
+            padding: 36px 40px;
+        }
+
+        /* 1. PHẦN GIỚI THIỆU */
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .hero-left h1 {
+            color: #252847;
+            font-size: 2.6rem;
+            line-height: 1.2;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            background-color: #f3f5ff;
+            border: 1px solid #d6dcff;
+            border-radius: 18px;
+            padding: 20px 24px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem; /* Phông chữ nhỏ gọn hơn */
+            font-style: italic; /* Nghiêng nhẹ tinh tế */
+            color: #3e4475;
+            word-break: break-word;
+        }
+
+        .info-item i {
+            color: #787FF6;
+            font-size: 1.2rem;
+            font-style: normal;
+            width: 24px;
+            text-align: center;
+        }
+
+        .intro-box {
+            background-color: #f3f5ff;
+            border-left: 5px solid #787FF6;
+            padding: 20px 24px;
+            border-radius: 0 16px 16px 0;
+            font-size: 1.08rem; /* Phông chữ nhỏ gọn, dễ nhìn */
+            font-style: italic; /* Chữ nghiêng nghệ thuật */
+            color: #3e4475;
+            line-height: 1.75;
+        }
+
+        .hero-social {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .hero-social span {
+            font-weight: 700;
+            color: #5c63d8;
+            font-size: 1.1rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            background-color: #f3f5ff;
+            border: 2px solid #787FF6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #787FF6;
+            font-size: 1.35rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .social-btn:hover {
+            background-color: #787FF6;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(120, 127, 246, 0.45);
+        }
+
+        .hero-right {
+            flex-shrink: 0;
+        }
+
+        .avatar-wrapper {
+            width: 250px;
+            height: 335px;
+            border-radius: 24px;
+            border: 6px solid #787FF6;
+            box-shadow: 0 12px 28px rgba(120, 127, 246, 0.35);
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            color: #5c63d8;
+            border-bottom: 3px solid #c3c8ff;
+            padding-bottom: 12px;
+            margin-bottom: 26px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: #787FF6;
+        }
+
+        /* 2. HÀNH TRÌNH HỌC TẬP */
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .stage-card {
+            background-color: #f7f8ff;
+            border: 1px solid #d6dcff;
+            border-top: 6px solid #787FF6;
+            border-radius: 18px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 26px rgba(120, 127, 246, 0.22);
+        }
+
+        .stage-badge {
+            align-self: flex-start;
+            background: linear-gradient(90deg, #787FF6, #9399fa);
+            color: #ffffff;
+            font-size: 0.92rem; /* Phông chữ nhỏ, gọn */
+            font-style: italic;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 10px rgba(120, 127, 246, 0.3);
+        }
+
+        .stage-card h3 {
+            color: #252847;
+            font-size: 1.35rem;
+            line-height: 1.35;
+        }
+
+        .stage-card p {
+            font-size: 1.02rem; /* Phông chữ nhỏ nghiêng mềm mại */
+            font-style: italic;
+            color: #464b75;
+            line-height: 1.68;
+        }
+
+        .stage-highlights {
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px dashed #c3c8ff;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stage-highlights span {
+            font-size: 0.98rem;
+            font-style: italic;
+            color: #5c63d8;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 3. LƯỚI SỞ THÍCH CHI TIẾT */
+        .hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 26px;
+        }
+
+        .hobby-card {
+            background-color: #f7f8ff;
+            border: 1px solid #d6dcff;
+            border-radius: 18px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(120, 127, 246, 0.2);
+        }
+
+        .hobby-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hobby-card h3 {
+            color: #252847;
+            font-size: 1.45rem;
+        }
+
+        .hobby-tag {
+            background-color: #e6e9ff;
+            color: #5c63d8;
+            font-size: 0.92rem;
+            font-style: italic;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .image-preview-box {
+            width: 100%;
+            height: 190px;
+            border: 2px solid #787FF6;
+            border-radius: 14px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        .image-preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hobby-desc {
+            font-size: 1.04rem; /* Phông chữ nhỏ, nghiêng tinh tế */
+            font-style: italic;
+            color: #464b75;
+            line-height: 1.68;
+        }
+
+        /* 4. KHU VỰC PHÁT MV TRỰC TIẾP */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 42%;
+            height: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 3px solid #787FF6;
+            box-shadow: 0 12px 28px rgba(120, 127, 246, 0.25);
+            background-color: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .journey-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 850px) {
+            body {
+                padding: 15px;
+            }
+            .glass-card {
+                padding: 25px 20px;
+            }
+            .hero-section {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .intro-box {
+                text-align: left;
+            }
+            .hero-social {
+                justify-content: center;
+            }
+            .hobby-grid {
+                grid-template-columns: 1fr;
+            }
+            .video-wrapper {
+                padding-bottom: 56.25%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CÁC STICKER TRÔI LƠ LỬNG XUNG QUANH BACKGROUND -->
+    <div class="bg-sticker st-1">✨</div>
+    <div class="bg-sticker st-2">🎵</div>
+    <div class="bg-sticker st-3">💜</div>
+    <div class="bg-sticker st-4">⭐</div>
+    <div class="bg-sticker st-5">🌸</div>
+    <div class="bg-sticker st-6">🎧</div>
+
+    <div class="main-wrapper">
+        <!-- PHẦN 1: GIỚI THIỆU -->
+        <section class="glass-card hero-section">
+            <div class="hero-left">
+                <h1>Nguyễn Gia Huy</h1>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-birthday-cake"></i>
+                        <span><strong>Ngày sinh:</strong> 02/08/2009</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span><strong>Lớp:</strong> 12A6 - THPT Hòn Gai</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span><strong>Email:</strong> nguyengiahuy02082009@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><strong>Quê quán:</strong> Hạ Long, Quảng Ninh</span>
+                    </div>
+                </div>
+
+                <div class="intro-box">
+                    👋 Xin chào! Mình là Nguyễn Gia Huy, học sinh lớp 12A6 trường THPT Hòn Gai. Chào mừng bạn đã ghé thăm không gian trực tuyến nhỏ của mình – nơi lưu giữ những sở thích, niềm đam mê và phong cách cá nhân trong suốt quãng đời học sinh cấp ba đáng nhớ này! Mình là một người trầm tính, hòa đồng với bạn bè. Hiện tại, mình đang tập trung ôn luyện cho kỳ thi tốt nghiệp THPT với mục tiêu chinh phục cánh cửa đại học mơ ước.
+                </div>
+
+                <div class="hero-social">
+                    <span>Kết nối với mình:</span>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://threads.net" target="_blank" class="social-btn" title="Threads">
+                            <i class="fab fa-threads"></i>
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" class="social-btn" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://github.com/huyluki1" target="_blank" class="social-btn" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="avatar-wrapper">
+                    <img src="avatar.jpg" alt="Ảnh đại diện Nguyễn Gia Huy">
+                </div>
+            </div>
+        </section>
+
+        <!-- PHẦN 2: HÀNH TRÌNH HỌC TẬP -->
+        <section class="glass-card">
+            <h2 class="section-title"><i class="fas fa-route"></i> Hành trình học tập cấp ba</h2>
+
+            <div class="journey-grid">
+                <div class="stage-card">
+                    <span class="stage-badge">Giai đoạn 1 • Lớp 10 (2024 - 2025)</span>
+                    <h3>Khởi đầu mới tại THPT Hòn Gai</h3>
+                    <p>
+                        Bước chân vào ngôi trường mới với bao bỡ ngỡ, mình nhanh chóng làm quen với môi trường học tập năng động, thầy cô tận tâm và những người bạn cùng lớp 10A6. Đây là thời gian mình xây dựng nền tảng kiến thức cơ bản và khám phá thế mạnh của bản thân.
+                    </p>
+                    <div class="stage-highlights">
+                        <span><i class="fas fa-check-circle"></i> Thích nghi môi trường THPT</span>
+                        <span><i class="fas fa-check-circle"></i> Xây dựng thói quen tự học</span>
+                    </div>
+                </div>
+
+                <div class="stage-card">
+                    <span class="stage-badge">Giai đoạn 2 • Lớp 11 (2025 - 2026)</span>
+                    <h3>Bứt phá kiến thức & Định hướng</h3>
+                    <p>
+                        Tập trung chuyên sâu vào các môn học trọng tâm, rèn luyện tư duy logic và giải quyết các dạng bài tập nâng cao. Bên cạnh việc học trên lớp, mình cũng bắt đầu tìm hiểu thêm về lập trình web cơ bản để tự tay xây dựng góc nhỏ cá nhân này.
+                    </p>
+                    <div class="stage-highlights">
+                        <span><i class="fas fa-check-circle"></i> Củng cố kiến thức chuyên sâu</span>
+                        <span><i class="fas fa-check-circle"></i> Khám phá HTML, CSS & Công nghệ</span>
+                    </div>
+                </div>
+
+                <div class="stage-card">
+                    <span class="stage-badge">Giai đoạn 3 • Lớp 12 (2026 - 2027)</span>
+                    <h3>Tăng tốc & Chinh phục Đại học</h3>
+                    <p>
+                        Chặng nước rút quan trọng nhất của quãng đời học sinh tại lớp 12A6. Mình đang dồn toàn lực hệ thống hóa kiến thức, luyện đề mỗi ngày với tinh thần kỷ luật cao nhất để sẵn sàng cho kỳ thi Tốt nghiệp THPT và chạm tay vào ngôi trường đại học mơ ước.
+                    </p>
+                    <div class="stage-highlights">
+                        <span><i class="fas fa-bullseye"></i> Mục tiêu: Đỗ nguyện vọng 1</span>
+                        <span><i class="fas fa-fire"></i> Quyết tâm cao độ mỗi ngày</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHẦN 3: SỞ THÍCH CHI TIẾT -->
+        <section class="glass-card">
+            <h2 class="section-title"><i class="fas fa-star"></i> Sở thích & Đam mê cá nhân</h2>
+
+            <div class="hobby-grid">
+                <div class="hobby-card">
+                    <div class="hobby-header">
+                        <h3>🎨 Vẽ & Sáng tạo</h3>
+                        <span class="hobby-tag">Nghệ thuật</span>
+                    </div>
+                    <div class="image-preview-box">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80" alt="Vẽ">
+                    </div>
+                    <p class="hobby-desc">
+                        Những lúc rảnh rỗi sau giờ ôn thi căng thẳng, mình thường phác họa vài nét vẽ tự do hoặc thiết kế giao diện nhỏ. Vẽ giúp mình rèn sự tỉ mỉ, kiên nhẫn và giải tỏa áp lực cực kỳ hiệu quả.
+                    </p>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-header">
+                        <h3>🎮 Chơi game</h3>
+                        <span class="hobby-tag">Giải trí</span>
+                    </div>
+                    <div class="image-preview-box">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Chơi game">
+                    </div>
+                    <p class="hobby-desc">
+                        Mình thích các tựa game chiến thuật, MOBA như Liên Quân Mobile để giao lưu cùng bạn bè sau giờ học. Đây cũng là cách giúp rèn luyện tư duy phản xạ nhanh và tinh thần phối hợp đồng đội.
+                    </p>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-header">
+                        <h3>🎬 Xem phim</h3>
+                        <span class="hobby-tag">Điện ảnh</span>
+                    </div>
+                    <div class="image-preview-box">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80" alt="Xem phim">
+                    </div>
+                    <p class="hobby-desc">
+                        Mình đam mê những bộ phim hành động, viễn tưởng và hoạt hình có cốt truyện sâu sắc. Mỗi bộ phim hay không chỉ mang lại phút giây thư giãn mà còn mở ra nhiều góc nhìn thú vị về cuộc sống.
+                    </p>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-header">
+                        <h3>🎧 Nghe nhạc</h3>
+                        <span class="hobby-tag">K-Pop & Chill</span>
+                    </div>
+                    <div class="image-preview-box">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Nghe nhạc">
+                    </div>
+                    <p class="hobby-desc">
+                        Âm nhạc luôn đồng hành cùng mình trong lúc làm bài tập lẫn khi nghỉ ngơi. Mình đặc biệt yêu thích các nhóm nhạc K-Pop như NMIXX, IVE, aespa với giai điệu cuốn hút và năng lượng tích cực.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHẦN 4: TRÌNH PHÁT MV TRỰC TIẾP -->
+        <section class="glass-card">
+            <h2 class="section-title"><i class="fab fa-youtube"></i> MV Yêu thích: NMIXX - "Blue Valentine"</h2>
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/EmeW6li6bbo?rel=0" 
+                    title="NMIXX Blue Valentine M/V" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
